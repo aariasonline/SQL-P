@@ -1,0 +1,24 @@
+--Create a store database
+
+CREATE TABLE CasuallyFl (name TEXT, price INTEGER, id INTEGER, purchased TEXT, cost INTEGER);
+
+INSERT INTO CasuallyFl VALUES ('shirt',10,1, 'yes', 20);
+INSERT INTO CasuallyFl VALUES ('pants', 20, 2, 'no', 0);
+INSERT INTO CasuallyFl VALUES ('hat', 15, 3, 'yes', 15);
+INSERT INTO CasuallyFl VALUES ('jacket', 30, 4, 'no', 0);
+INSERT INTO CasuallyFl VALUES ('shoes', 50, 5, 'yes', 50);
+INSERT INTO CasuallyFl VALUES ('dress', 40, 6, 'no', 0);
+INSERT INTO CasuallyFl VALUES ('skirt', 25, 7, 'yes', 25);
+INSERT INTO CasuallyFl VALUES ('t-shirt', 10, 8, 'no', 0);
+INSERT INTO CasuallyFl VALUES ('socks', 5, 9, 'yes', 5);
+INSERT INTO CasuallyFl VALUES ('belt', 10, 10, 'no', 0);
+INSERT INTO CasuallyFl VALUES ('scarf', 20, 11, 'yes', 20);
+INSERT INTO CasuallyFl VALUES ('gloves', 15, 12, 'no', 0);
+INSERT INTO CasuallyFl VALUES ('backpack',9,13, 'yes', 9);
+INSERT INTO CasuallyFl VALUES ('glasses',8,14, 'no', 0);
+INSERT INTO CasuallyFl VALUES ('wallets',22,15, 'yes', 22);
+
+
+----display the database ordered by price. 
+SELECT * FROM CasuallyFL
+ORDER BY price desc; 
