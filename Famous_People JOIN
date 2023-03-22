@@ -1,0 +1,42 @@
+/* Create Table with a list of famous people*/
+CREATE TABLE Famous_People (id INTEGER, name TEXT);
+INSERT INTO famous_people VALUES(1, 'Miley Cyrus');
+INSERT INTO famous_People VALUES(2, 'Conor Mcgregor');
+INSERT INTO famous_people VALUES(3, 'Bill Gates');
+INSERT INTO famous_people VALUES(4, 'Oprah Winfrey');
+INSERT INTO famous_people VALUES(5, 'Taylor Swift');
+INSERT INTO famous_people VALUES(6, 'Elon Musk');
+INSERT INTO famous_people VALUES(7, 'Solana Imani Rowe');
+INSERT INTO famous_people VALUES(8, 'Lionel Messi');
+INSERT INTO famous_people VALUES(9, 'Kanye West');
+INSERT INTO famous_people VALUES(10,'Kylie Jenner');
+INSERT INTO famous_people VALUES(11, 'Rihanna');
+INSERT INTO famous_people VALUES(12, 'Dwayne Johnson');
+INSERT INTO famous_people VALUES(13, 'Beyonce Knowles');
+INSERT INTO famous_people VALUES(14, 'Jeff Bezos');
+INSERT INTO famous_people VALUES(15, 'Serena Williams');
+
+/*Create Second table with attributes about famous people, (Networth, Industry) */
+CREATE TABLE industry_and_networth (id INTEGER, industry TEXT, net_worth INTEGER);
+
+INSERT INTO industry_and_networth VALUES (1, 'Singer', 160000000);
+INSERT INTO industry_and_networth VALUES (2, 'Mixed Martial Artist', 220000000);
+INSERT INTO industry_and_networth VALUES (3, 'Technology', 130000000000);
+INSERT INTO industry_and_networth VALUES (4, 'Media', 2700000000);
+INSERT INTO industry_and_networth VALUES (5, 'Singer', 365000000);
+INSERT INTO industry_and_networth VALUES (6, 'Technology', 201000000000);
+INSERT INTO industry_and_networth VALUES (7, 'Singer', 6000000);
+INSERT INTO industry_and_networth VALUES (8, 'Football', 400000000);
+INSERT INTO industry_and_networth VALUES (9, 'Music', 1800000000);
+INSERT INTO industry_and_networth VALUES (10, 'Cosmetics', 900000000);
+INSERT INTO industry_and_networth VALUES (11, 'Singer', 60000000);
+INSERT INTO industry_and_networth VALUES (12, 'Actor', 320000000);
+INSERT INTO industry_and_networth VALUES (13, 'Singer', 500000000);
+INSERT INTO industry_and_networth VALUES (14, 'Technology', 177000000000);
+INSERT INTO industry_and_networth VALUES (15, 'Tennis', 210000000);
+
+/*What do tables have in common? (ID) Join tables on ID*/ 
+SELECT f.name, i.industry, i.net_worth
+FROM famous_people f
+JOIN industry_and_networth i
+ON f.id = i.id
