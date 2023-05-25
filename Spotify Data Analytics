@@ -1,0 +1,57 @@
+-- For this project, I downloaded Spotify data from Kaggle.
+-- Then I created a table to insert Spotify data into.
+-- Finally, I performed analytics on the data using SQL. 
+
+-Creating the table: 
+CREATE TABLE BIT_DB.Spotifydata (
+id integer PRIMARY KEY,
+artist_name varchar NOT NULL,
+track_name varchar NOT NULL,
+track_id varchar NOT NULL,
+popularity integer NOT NULL,
+danceability decimal(4,3) NOT NULL,
+energy decimal(4,3) NOT NULL,
+key integer NOT NULL,
+loudness decimal(5,3) NOT NULL,
+mode integer NOT NULL,
+speechiness decimal(5,4) NOT NULL,
+acousticness decimal(6,5) NOT NULL,
+instrumentalness text NOT NULL,
+liveness decimal(5,4) NOT NULL,
+valence decimal(4,3) NOT NULL,
+tempo decimal(6,3) NOT NULL,
+duration_ms integer NOT NULL,
+time_signature integer NOT NULL 
+)
+
+--Then I inserted the Spotify Data .csv into the table.
+
+--Next, I explored the data using the following SQL. 
+
+-- Here I am finding out which artists have the most tracks on this list, and I am ordering them by most to least as Number of Songs--
+SELECT artist_name, COUNT(track_name) AS 'Number of Songs' 
+FROM Spotifydata
+GROUP BY artist_name
+ORDER BY COUNT(track_name) DESC;
+
+
+-- Here I am selecting the Averages of energy, loudness, liveness, and tempo as well as renaming them--
+SELECT AVG(energy) AS "Average Energy",
+AVG(loudness) AS "Average Loudness",
+AVG(liveness) AS "Average Liveness",
+AVG(tempo) AS "Average Tempo"
+FROM Spotifydata;
+
+
+--Here I am selecting the artist name, track, as well as getting the ms converted to minutes and seconds for the total time. I am ordering it from longest and limiting by 10 top songs.--
+SELECT artist_name, track_name, duration_ms/60000 AS "minutes"
+,(duration_ms % 60000) / 1000.0 AS seconds
+FROM SpotifyData
+ORDER BY minutes DESC, seconds DESC
+LIMIT 10;
+
+-- Here I am selecting the top 10 shortest songs, and viewing their popularity to see if there is a link between song length and popularity. These are limited to the 10 shortest songs on this list.--
+SELECT popularity, duration_ms
+FROM SpotifyData
+ORDER BY duration_ms ASC
+LIMIT 10
