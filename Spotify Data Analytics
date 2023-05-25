@@ -55,3 +55,17 @@ SELECT popularity, duration_ms
 FROM SpotifyData
 ORDER BY duration_ms ASC
 LIMIT 10
+
+
+--Here I used CTE to calculate average popularity by artist, and label them as a TOP STAR--
+WITH popularity_average_CTE AS (
+  SELECT artist_name, AVG(popularity) AS average_popularity
+  FROM SpotifyData
+  GROUP BY artist_name
+)
+SELECT artist_name,
+ average_popularity, 'Top Star' AS tag
+FROM popularity_average_CTE
+WHERE average_popularity >= 90;
+
+
