@@ -1,0 +1,97 @@
+This is a large SQL project using the Chinook database, here I created questions one might potentially ask.
+
+1.-- Here I selected two tables ( customers and Invoices ) and joined them, afterwards I filtered specific columns desired and figured 
+out the total SUM each customer purchased ordered by customerID--
+
+SELECT CustomerID,
+ Firstname, Lastname,
+   address, 
+   city,
+    state, 
+    country,
+     postalcode,
+      phone,
+       email,
+        SUM(total) AS total
+ FROM customers
+JOIN invoices
+ON customers.customerid = invoices.customerid
+GROUP BY Customers.customerid
+ORDER BY customers.customerid
+
+2.--Here are the Top 20 countries ordered by revenue spent--
+
+SELECT BillingCountry, ROUND(SUM(Total), 3) AS "SUM of Total Per Country"
+FROM invoices
+GROUP BY BillingCountry
+ORDER BY "Sum of Total Per Country" DESC 
+LIMIT 20
+
+3.-- Organizing data by joining 4 tables together and renaming columns for legibility--
+SELECT title, trackID, name AS "Song Name", albumID, artists.name AS "Artist", genres.name AS "Genre"
+ FROM albums
+ JOIN tracks 
+ ON albums.AlbumID = tracks.AlbumId
+ JOIN artists
+ ON artists.artistID = albums.artistID
+ JOIN genres ON genres.genreid = tracks.genreid
+ ORDER BY title
+ 
+4. -- Selecting only the customers from Brazil--
+SELECT CustomerID, Firstname, Lastname,Address, Country
+FROM customers
+WHERE Country = "Brazil"
+
+5. --Selecting the Invoices for the customers from Brazil by Joining tables--
+
+SELECT CustomerId, InvoiceID, Firstname, Lastname, InvoiceDate,Address, BillingCountry, Total
+FROM customers
+JOIN invoices
+ON invoices.customerID = customers.CustomerId
+WHERE Country = "Brazil"
+
+6.--Selecting employees who are sales agents--
+SELECT EmployeeID, LastName,FirstName, Title, Email
+ FROM employees
+WHERE Title = "Sales Support Agent"
+
+7.--Here I found the total sales by each sales support agent and ordered them by highest to lowest. There are 3 table joins in this query--
+
+SELECT ROUND(SUM(invoices.total)) AS "Total Sales $", employees.firstname, employees.LastName AS "Sales Agent"
+FROM customers
+JOIN employees
+ ON employees.employeeid = customers.supportrepid
+ JOIN invoices
+ ON invoices.customerid = customers.CustomerId
+ GROUP BY "Sales Agent"
+ ORDER BY "Total Sales $" DESC
+ 
+8. -- How many Sales in 2009?--
+SELECT COUNT(InvoiceID) AS "Invoices in 2009"
+FROM invoices 
+WHERE InvoiceDate LIKE "2009%"
+
+9.-- The 10 top customers with the highest purchase amounts--
+SELECT c.CustomerId, c.FirstName, c.LastName, SUM(i.Total) AS TotalPurchaseAmount
+FROM customers c
+JOIN invoices i ON c.CustomerId = i.CustomerId
+GROUP BY c.CustomerId
+ORDER BY TotalPurchaseAmount DESC
+LIMIT 10;
+
+10. -- Total number of tracks by genre --
+SELECT g.Name AS Genre, COUNT(t.TrackId) AS TotalTracks
+FROM genres g
+JOIN tracks t ON g.GenreId = t.GenreId
+GROUP BY g.Name
+ORDER BY TotalTracks DESC
+
+11. --Employees that have assisted the most customers --
+SELECT e.EmployeeId, e.FirstName, e.LastName, COUNT(c.CustomerId) AS TotalCustomersAssisted
+FROM employees e
+JOIN customers c ON e.EmployeeId = c.SupportRepId
+GROUP BY e.EmployeeId
+ORDER BY TotalCustomersAssisted DESC
+ 
+ 
+ 
